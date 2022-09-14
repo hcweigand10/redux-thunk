@@ -7,7 +7,7 @@ import thunk from 'redux-thunk'
 import App from './App';
 import reducers from './reducers'
 
-const store = configureStore({reducer: reducers}, applyMiddleware(thunk))
+const store = configureStore({reducer: reducers})
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

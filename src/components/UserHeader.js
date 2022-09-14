@@ -1,12 +1,21 @@
-import React, {useState} from 'react'
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { fetchUser } from "../actions";
 
-const UserHeader = () => {
+const UserHeader = ({ userId, user, fetchUser }) => {
+    useEffect(() => {
+        fetchUser(userId);
+    }, [userId, fetchUser]);
 
     return (
-        <div className='container'>
-             <h3>AuthorName</h3>
+        <div className="container">
+            <h3>{user ? user.name : "Not Found"}</h3>
         </div>
-    )
-}
+    );
+};
 
-export default UserHeader
+const mapStateToProps = (state, ownProps) => {
+    return { user: state.users.find(user => user.id === ownProps.userId) };
+};
+
+export default connect(mapStateToProps, { fetchUser })(UserHeader);
