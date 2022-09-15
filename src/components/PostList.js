@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { fetchPostsAndUsers, fetchPosts } from "../actions";
+import { fetchPostsAndUsers } from "../actions";
 
 import UserHeader from "./UserHeader";
 
