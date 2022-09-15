@@ -4,9 +4,9 @@ import { fetchPostsAndUsers, fetchPosts } from "../actions";
 
 import UserHeader from "./UserHeader";
 
-const PostList = ({ fetchPostsAndUsers, posts, dispatch }) => {
+const PostList = ({ posts, dispatch }) => {
     useEffect(() => {
-        dispatch(fetchPosts());
+        dispatch(fetchPostsAndUsers());
     }, [dispatch]);
 
     const renderList = posts.map((post) => {
