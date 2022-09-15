@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { fetchPostsAndUsers } from "../actions";
+import { fetchPostsAndUsers, fetchPosts } from "../actions";
 
 import UserHeader from "./UserHeader";
 
-const PostList = ({ fetchPostsAndUsers, posts }) => {
+const PostList = ({ fetchPostsAndUsers, posts, dispatch }) => {
     useEffect(() => {
-        fetchPostsAndUsers();
-    }, [fetchPostsAndUsers]);
+        dispatch(fetchPosts());
+    }, [dispatch]);
 
     const renderList = posts.map((post) => {
         return (
@@ -53,4 +53,4 @@ const mapStateToProps = (state) => {
     return { posts: state.posts };
 };
 
-export default connect(mapStateToProps, { fetchPostsAndUsers })(PostList);
+export default connect(mapStateToProps)(PostList);
