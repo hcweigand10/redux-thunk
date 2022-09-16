@@ -35,20 +35,6 @@ const PostList = ({ posts, dispatch }) => {
     );
 };
 
-// class PostList extends React.Component {
-//     componentDidMount() {
-//         this.props.fetchPosts();
-//     }
-//     render() {
-//         console.log(this.props.posts);
-//         return (
-//             <div className="ui container">
-//                 <h3>Post List</h3>
-//             </div>
-//         );
-//     }
-// }
-
 const mapStateToProps = (state) => {
     return { posts: state.posts };
 };
