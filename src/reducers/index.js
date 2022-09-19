@@ -1,8 +1,6 @@
 import { combineReducers } from 'redux'
-import postsReducer from './postsReducer'
-import usersReducer from './usersReducer'
+import { postsApi } from "../utils/postsSlice"
 
 export default combineReducers({
-    posts: postsReducer,
-    users: usersReducer
+    postsApi: postsApi.reducer,
 })

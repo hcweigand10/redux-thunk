@@ -1,15 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useQuery, useEffect } from "react";
 import { connect } from "react-redux";
-import { fetchPostsAndUsers } from "../actions";
+// import { fetchPostsAndUsers } from "../actions";
 
 import UserHeader from "./UserHeader";
+import { useGetPostsQuery, useGetUsersQuery } from "../utils/postsSlice";
 
-const PostList = ({ posts, dispatch }) => {
-    useEffect(() => {
-        dispatch(fetchPostsAndUsers());
-    }, [dispatch]);
+const PostList = () => {
 
-    const renderList = posts.map((post) => {
+
+    const {data: postsData, error: postsError, isLoading: postsIsLoading} = useGetPostsQuery()
+    const {
+        data,
+        error,
+        isLoading
+    } = useGetUsersQuery();
+    
+
+    const renderList = (postsIsLoading || isLoading) ? null : postsData.map((post) => {
         return (
             <div class="item" key={post.id}>
                 <i className="large middle aligned icon user" />
@@ -21,6 +28,7 @@ const PostList = ({ posts, dispatch }) => {
                     <div class="description">
                         <p>{post.body}</p>
                     </div>
+                    {/* <UserHeader user={data.find(user => user.id === post.userId)}/> */}
                     <UserHeader userId={post.userId}/>
                 </div>
             </div>
@@ -30,13 +38,16 @@ const PostList = ({ posts, dispatch }) => {
     return (
         <div className="ui container">
             <h3>Post List</h3>
+            {postsIsLoading ? <h3>Loading...</h3> :
             <div className="ui relaxed divided list">{renderList}</div>
+            }
         </div>
     );
 };
 
-const mapStateToProps = (state) => {
-    return { posts: state.posts };
-};
+const mapStateToProps = () => {
 
-export default connect(mapStateToProps)(PostList);
+}
+
+
+export default connect()(PostList);
